@@ -39,6 +39,8 @@ private slots:
     
     void on_actionSave_triggered();
 
+    void saveOnClose(int index);
+
     void on_actionSave_As_triggered();
 
     void on_actionCopy_triggered();

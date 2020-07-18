@@ -53,7 +53,7 @@ void MainWindow::closeCurTab(int index)
     {
         qDebug() << "Showing Dialog";
         // create dialog
-        c = new closeNewFileDialog(this);
+        c = new closeNewFileDialog(this, index);
         connect(c->getBBox(), SIGNAL(clicked(QAbstractButton *)), this, SLOT(take_action(QAbstractButton *)));
         int x = c->exec();
 
@@ -93,7 +93,7 @@ void MainWindow::closeCurTab(int index)
         if(x != 0)
         {
             qDebug() << "Showing Dialog";
-            c = new closeNewFileDialog(this);
+            c = new closeNewFileDialog(this, index);
             connect(c->getBBox(), SIGNAL(clicked(QAbstractButton *)), this, SLOT(take_action(QAbstractButton *)));
             int x = c->exec();
 
@@ -132,7 +132,7 @@ void MainWindow::take_action(QAbstractButton *butPressed)
 
     if(QString::compare(s, "Save") == 0)
     {
-        on_actionSave_triggered();
+        saveOnClose(c->ind);
         c->accept();
     }
     else if(QString::compare(s, "&No") == 0)
@@ -345,6 +345,59 @@ void MainWindow::on_actionSave_As_triggered()
     qDebug() << "Save As Successfull";
 }
 
+
+
+
+// save on close action
+void MainWindow::saveOnClose(int index)
+{
+    // get current active tab
+    QWidget *curTab = ui->tabWidget->widget(index);
+
+    // get the TextEdit Widget of current active tab
+    QList<QTextEdit *> allTextEdits = curTab->findChildren<QTextEdit *>();
+    if (allTextEdits.count() != 1)
+    {
+        qDebug() << "Error in finding current tab's TextEdit";
+        return;
+    }
+
+    QString s = ui->tabWidget->tabText(index);
+    QFile file;
+    // check if new file
+    auto t = dynamic_cast<InsideTab *>(curTab);
+    if(t->getIsNew())
+    {
+        QString newFileName = QFileDialog::getSaveFileName(this, "Save As", "C://", "Text File (*.txt)");
+        qDebug() << "Saving New File As : "<<newFileName;
+        file.setFileName(newFileName);
+
+        // update pos of tab with new file name
+        pos[newFileName] = pos[s];
+        // remove older filename from map
+        pos.remove(s);
+    }
+    else
+    {
+        qDebug() << "Saving File : "<<s;
+        file.setFileName(s);
+    }
+
+    // open file
+    if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QFile::Text))
+    {
+        QMessageBox::warning(this, "Warning", "This file cannot be opened");
+    }
+
+    // write to file
+    QTextStream out(&file);
+    QTextEdit *temp = allTextEdits[0];
+    QString ss = temp->toPlainText();
+
+    out << ss;
+    file.close();
+    qDebug() << "Save Successfull";
+}
 
 
 // copy action

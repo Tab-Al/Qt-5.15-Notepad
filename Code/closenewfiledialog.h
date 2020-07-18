@@ -13,15 +13,16 @@ class closeNewFileDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit closeNewFileDialog(QWidget *parent = nullptr);
+    explicit closeNewFileDialog(QWidget *parent = nullptr, int i = -1);
     QDialogButtonBox* getBBox();
     ~closeNewFileDialog();
-
+    int ind = -1;
 private slots:
 
 
 private:
     Ui::closeNewFileDialog *ui;
+
 };
 
 #endif // CLOSENEWFILEDIALOG_H

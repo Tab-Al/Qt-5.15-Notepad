@@ -455,7 +455,8 @@ void MainWindow::saveOnClose(int index)
 void MainWindow::on_actionCopy_triggered()
 {
     QTextEdit *current = getCurrentTextEdit();
-    current->copy();
+    if(current)
+        current->copy();
 }
 
 
@@ -464,7 +465,8 @@ void MainWindow::on_actionCopy_triggered()
 void MainWindow::on_actionCut_triggered()
 {
     QTextEdit *current = getCurrentTextEdit();
-    current->cut();
+    if(current)
+        current->cut();
 }
 
 
@@ -472,7 +474,8 @@ void MainWindow::on_actionCut_triggered()
 void MainWindow::on_actionPaste_triggered()
 {
     QTextEdit *current = getCurrentTextEdit();
-    current->paste();
+    if(current)
+        current->paste();
 }
 
 
@@ -490,7 +493,8 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionUndo_triggered()
 {
     QTextEdit *current = getCurrentTextEdit();
-    current->undo();
+    if(current)
+        current->undo();
 }
 
 

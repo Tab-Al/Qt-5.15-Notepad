@@ -16,7 +16,8 @@ closeNewFileDialog::closeNewFileDialog(QWidget *parent, int i, QString f, bool q
 
     if(qc == true)
     {
-        ui->buttonBox->button(QDialogButtonBox::Cancel)->setEnabled(false);
+        //ui->buttonBox->button(QDialogButtonBox::Cancel)->setEnabled(false);
+        ui->buttonBox->removeButton(ui->buttonBox->button(QDialogButtonBox::Cancel));
     }
     setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 }

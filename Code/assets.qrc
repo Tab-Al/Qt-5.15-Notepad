@@ -11,5 +11,14 @@
         <file>assets/icons/Save.bmp</file>
         <file>assets/icons/Sticky.bmp</file>
         <file>assets/icons/Turtle.png</file>
+        <file>assets/icons/open-512.webp</file>
+        <file>assets/icons/add-subjoin-document-instrument-file-single-new-white-paper-icon-11563140202m0t37pj3rs.png</file>
+        <file>assets/icons/add.png</file>
+        <file>assets/icons/back.png</file>
+        <file>assets/icons/close.png</file>
+        <file>assets/icons/portable-document-format.png</file>
+        <file>assets/icons/save.png</file>
+        <file>assets/icons/scissors.png</file>
+        <file>assets/icons/ui.png</file>
     </qresource>
 </RCC>

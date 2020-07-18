@@ -6,15 +6,36 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>736</width>
-    <height>378</height>
+    <width>812</width>
+    <height>471</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Notepad by Tab_Al</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background : rgb(52, 55, 93)</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
@@ -22,6 +43,28 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane { /* The tab widget frame */
+    border-top: 0px solid #C2C7CB;
+}
+
+QTabBar::tab {
+    background: rgb(5, 55, 93);
+    border: 0.5px solid rgb(0,0,0);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    min-width: 35ex;
+    padding: 4px 4px 0px 4px;
+	color :white; 
+}
+
+QTabBar::tab:selected {
+	background : black;
+    border-color: rgb(0,0,0);
+	color : white;
+}
+</string>
       </property>
       <property name="tabsClosable">
        <bool>true</bool>
@@ -38,11 +81,42 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>736</width>
-     <height>21</height>
+     <width>812</width>
+     <height>35</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Tw Cen MT</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+QMenuBar {
+	color : white;
+    spacing: 5px;
+	margin : 10px 0px 5px 0px;
+	padding : 5px 0px 5px 0px;
+
+}
+
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    background: rgb(0,0,0);
+}
+
+QMenuBar::item:pressed {
+    background: rgb(0,0,0);
+}
+</string>
+   </property>
    <widget class="QMenu" name="menuFile">
+    <property name="styleSheet">
+     <string notr="true">background : rgb(0, 0, 43);
+color : white;</string>
+    </property>
     <property name="title">
      <string>File</string>
     </property>
@@ -53,6 +127,10 @@
     <addaction name="actionClose_Current_Tab"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
+    <property name="styleSheet">
+     <string notr="true">background : rgb(0, 0, 43);
+color : white;</string>
+    </property>
     <property name="title">
      <string>Edit</string>
     </property>
@@ -61,7 +139,11 @@
     <addaction name="actionPaste"/>
     <addaction name="actionUndo"/>
    </widget>
-   <widget class="QMenu" name="menuExit">
+   <widget class="QMenu" name="menuOther">
+    <property name="styleSheet">
+     <string notr="true">background : rgb(0, 0, 43);
+color : white;</string>
+    </property>
     <property name="title">
      <string>Other</string>
     </property>
@@ -69,9 +151,28 @@
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuExit"/>
+   <addaction name="menuOther"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="styleSheet">
+    <string notr="true">
+QToolBar {
+	border-top : 0.5px solid black;
+
+    spacing: 25px;
+	icon-size : 30px;
+
+	padding : 5px;
+	margin-left : 0px;
+}
+
+QToolbar::separator {
+	background : black;
+}</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -79,19 +180,31 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionNew"/>
+   <addaction name="separator"/>
    <addaction name="actionOpen"/>
+   <addaction name="separator"/>
    <addaction name="actionSave"/>
+   <addaction name="separator"/>
    <addaction name="actionCut"/>
+   <addaction name="separator"/>
    <addaction name="actionCopy"/>
+   <addaction name="separator"/>
    <addaction name="actionPaste"/>
+   <addaction name="separator"/>
+   <addaction name="actionUndo"/>
    <addaction name="separator"/>
    <addaction name="actionClose_Current_Tab"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="styleSheet">
+    <string notr="true">background : black;
+color : white;</string>
+   </property>
+  </widget>
   <action name="actionNew">
    <property name="icon">
     <iconset resource="assets.qrc">
-     <normaloff>:/ico/assets/icons/New.bmp</normaloff>:/ico/assets/icons/New.bmp</iconset>
+     <normaloff>:/ico/assets/icons/add.png</normaloff>:/ico/assets/icons/add.png</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -103,7 +216,7 @@
   <action name="actionOpen">
    <property name="icon">
     <iconset resource="assets.qrc">
-     <normaloff>:/ico/assets/icons/Open.bmp</normaloff>:/ico/assets/icons/Open.bmp</iconset>
+     <normaloff>:/ico/assets/icons/open-512.webp</normaloff>:/ico/assets/icons/open-512.webp</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -120,7 +233,7 @@
   <action name="actionCopy">
    <property name="icon">
     <iconset resource="assets.qrc">
-     <normaloff>:/ico/assets/icons/Copy.bmp</normaloff>:/ico/assets/icons/Copy.bmp</iconset>
+     <normaloff>:/ico/assets/icons/portable-document-format.png</normaloff>:/ico/assets/icons/portable-document-format.png</iconset>
    </property>
    <property name="text">
     <string>Copy</string>
@@ -132,7 +245,7 @@
   <action name="actionCut">
    <property name="icon">
     <iconset resource="assets.qrc">
-     <normaloff>:/ico/assets/icons/Cut.bmp</normaloff>:/ico/assets/icons/Cut.bmp</iconset>
+     <normaloff>:/ico/assets/icons/scissors.png</normaloff>:/ico/assets/icons/scissors.png</iconset>
    </property>
    <property name="text">
     <string>Cut</string>
@@ -144,7 +257,7 @@
   <action name="actionPaste">
    <property name="icon">
     <iconset resource="assets.qrc">
-     <normaloff>:/ico/assets/icons/Paste.bmp</normaloff>:/ico/assets/icons/Paste.bmp</iconset>
+     <normaloff>:/ico/assets/icons/ui.png</normaloff>:/ico/assets/icons/ui.png</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
@@ -154,6 +267,10 @@
    </property>
   </action>
   <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="assets.qrc">
+     <normaloff>:/ico/assets/icons/back.png</normaloff>:/ico/assets/icons/back.png</iconset>
+   </property>
    <property name="text">
     <string>Undo</string>
    </property>
@@ -161,7 +278,7 @@
   <action name="actionSave">
    <property name="icon">
     <iconset resource="assets.qrc">
-     <normaloff>:/ico/assets/icons/Save.bmp</normaloff>:/ico/assets/icons/Save.bmp</iconset>
+     <normaloff>:/ico/assets/icons/save.png</normaloff>:/ico/assets/icons/save.png</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -182,7 +299,7 @@
   <action name="actionClose_Current_Tab">
    <property name="icon">
     <iconset resource="assets.qrc">
-     <normaloff>:/ico/assets/icons/DeleteSticky.bmp</normaloff>:/ico/assets/icons/DeleteSticky.bmp</iconset>
+     <normaloff>:/ico/assets/icons/close.png</normaloff>:/ico/assets/icons/close.png</iconset>
    </property>
    <property name="text">
     <string>Close Current Tab</string>

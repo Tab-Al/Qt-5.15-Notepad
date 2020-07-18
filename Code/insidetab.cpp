@@ -25,3 +25,8 @@ void InsideTab::setIsNew(bool value)
 {
     isNew = value;
 }
+
+void InsideTab::setFilename(const QString &value)
+{
+    filename = value;
+}

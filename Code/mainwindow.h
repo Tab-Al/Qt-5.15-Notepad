@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QMap>
 #include <QTextEdit>
+#include "closenewfiledialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,7 +26,12 @@ public:
 
 private slots:
     void on_actionNew_triggered();
+
     void tabSelected();
+
+    void closeCurTab(int);
+
+    void take_action(QAbstractButton *);
 
     void on_actionOpen_triggered();
 
@@ -43,11 +49,15 @@ private slots:
 
     void on_actionExit_triggered();
 
+    void on_actionUndo_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString currentFile = "";
     int noOfTabs = 0;
     QMap<QString, int> pos;
+    closeNewFileDialog *c = NULL;
+    int totalNewOpened = 0;
 };
 
 #endif // MAINWINDOW_H

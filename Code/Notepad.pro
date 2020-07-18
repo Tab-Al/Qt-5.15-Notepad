@@ -25,15 +25,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        closenewfiledialog.cpp \
         insidetab.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
+        closenewfiledialog.h \
         insidetab.h \
         mainwindow.h
 
 FORMS += \
+        closenewfiledialog.ui \
         insidetab.ui \
         mainwindow.ui
 

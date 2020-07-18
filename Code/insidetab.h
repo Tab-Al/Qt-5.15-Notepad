@@ -19,6 +19,8 @@ public:
 
     void setIsNew(bool value);
 
+    void setFilename(const QString &value);
+
 private:
     Ui::InsideTab *ui;
     QString filename = "";

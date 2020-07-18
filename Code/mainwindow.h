@@ -29,9 +29,11 @@ private slots:
 
     void tabSelected();
 
-    void closeCurTab(int);
+    void closeCurTab(int, bool f = false);
 
     void take_action(QAbstractButton *);
+
+    void quitting();
 
     void on_actionOpen_triggered();
 
@@ -54,6 +56,8 @@ private slots:
     void on_actionUndo_triggered();
 
     void on_actionClose_Current_Tab_triggered();
+
+    void changeMsg();
 
 private:
     Ui::MainWindow *ui;

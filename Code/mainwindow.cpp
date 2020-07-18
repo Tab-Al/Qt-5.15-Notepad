@@ -7,7 +7,7 @@
 #include "closenewfiledialog.h"
 #include <QDialogButtonBox>
 #include <QAbstractButton>
-
+#include <QTimer>
 
 
 // constructor
@@ -15,10 +15,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     this->setCentralWidget((ui->tabWidget));
-
+    ui->statusBar->showMessage("To Open File (Ctrl + O)  |  To Create File (Ctrl + N)");
 
     connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
     connect(ui->tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeCurTab(int)));
+    connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(quitting()));
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(changeMsg()));
+    timer->start(5000);
 }
 
 
@@ -42,8 +47,9 @@ void MainWindow::tabSelected()
 
 
 // when a tab is closed
-void MainWindow::closeCurTab(int index)
+void MainWindow::closeCurTab(int index, bool quitting)
 {
+    qDebug() << "Trying to close : " << ui->tabWidget->tabText(index);
     // get info about the tab that is being closed
     QWidget *curTab = ui->tabWidget->widget(index);
     InsideTab *t = dynamic_cast<InsideTab *>(curTab);
@@ -53,7 +59,11 @@ void MainWindow::closeCurTab(int index)
     {
         qDebug() << "Showing Dialog";
         // create dialog
-        c = new closeNewFileDialog(this, index);
+        // if quitting then disable Cancel Button
+        if(quitting == true)
+            c = new closeNewFileDialog(this, index, ui->tabWidget->tabText(index), true);
+        else
+            c = new closeNewFileDialog(this, index, ui->tabWidget->tabText(index), false);
         connect(c->getBBox(), SIGNAL(clicked(QAbstractButton *)), this, SLOT(take_action(QAbstractButton *)));
         int x = c->exec();
 
@@ -93,7 +103,11 @@ void MainWindow::closeCurTab(int index)
         if(x != 0)
         {
             qDebug() << "Showing Dialog";
-            c = new closeNewFileDialog(this, index);
+            if(quitting == true)
+                c = new closeNewFileDialog(this, index, ui->tabWidget->tabText(index), true);
+            else
+                c = new closeNewFileDialog(this, index, ui->tabWidget->tabText(index), false);
+
             connect(c->getBBox(), SIGNAL(clicked(QAbstractButton *)), this, SLOT(take_action(QAbstractButton *)));
             int x = c->exec();
 
@@ -120,6 +134,8 @@ void MainWindow::closeCurTab(int index)
     ui->tabWidget->removeTab(index);
     // decrease total no of tabs
     noOfTabs--;
+
+    qDebug() << "Closed Successfully";
 }
 
 
@@ -142,6 +158,18 @@ void MainWindow::take_action(QAbstractButton *butPressed)
     else if(QString::compare(s, "Cancel") == 0)
     {
         c->reject();
+    }
+}
+
+
+
+// close All before quitting
+void MainWindow::quitting()
+{
+    while(noOfTabs > 0)
+    {
+
+        closeCurTab(0, true);
     }
 }
 
@@ -452,6 +480,7 @@ void MainWindow::on_actionPaste_triggered()
 // Exit action
 void MainWindow::on_actionExit_triggered()
 {
+    quitting();
     QApplication::quit();
 }
 
@@ -464,7 +493,28 @@ void MainWindow::on_actionUndo_triggered()
     current->undo();
 }
 
+
+
+// close current tab action
 void MainWindow::on_actionClose_Current_Tab_triggered()
 {
     closeCurTab(ui->tabWidget->currentIndex());
+}
+
+
+
+// change status bar msg
+void MainWindow::changeMsg()
+{
+    QString s1("To Open File (Ctrl + O)  |  To Create File (Ctrl + N)");
+    QString s2("Created by Tab_Al");
+
+    if(QString::compare(ui->statusBar->currentMessage(), s1) == 0)
+    {
+        ui->statusBar->showMessage(s2);
+    }
+    else if(QString::compare(ui->statusBar->currentMessage(), s2) == 0)
+    {
+        ui->statusBar->showMessage(s1);
+    }
 }

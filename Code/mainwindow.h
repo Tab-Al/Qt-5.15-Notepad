@@ -53,6 +53,8 @@ private slots:
 
     void on_actionUndo_triggered();
 
+    void on_actionClose_Current_Tab_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString currentFile = "";

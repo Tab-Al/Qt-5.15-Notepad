@@ -201,6 +201,12 @@ void MainWindow::on_actionOpen_triggered()
     QString filter = "Text File (*.txt)";
     QString fileName = QFileDialog::getOpenFileName(this, "Open File", "C://", filter);
 
+    if(fileName.isNull())
+    {
+        qDebug() << "No file Selected ";
+        return;
+    }
+
     // if same file exists open its tab
     if(pos.find(fileName) != pos.end())
     {
@@ -283,6 +289,7 @@ void MainWindow::on_actionSave_triggered()
     if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QFile::Text))
     {
         QMessageBox::warning(this, "Warning", "This file cannot be opened");
+        return;
     }
 
     QTextStream out(&file);
@@ -313,6 +320,13 @@ void MainWindow::on_actionSave_As_triggered()
 
     QFile file;
     QString newFileName = QFileDialog::getSaveFileName(this, "Save As", "C://", "Text File (*.txt)");
+
+    if(newFileName.isNull())
+    {
+        qDebug() << "No file selected ";
+        return;
+    }
+
     qDebug() << "Saving New File As : "<<newFileName;
     file.setFileName(newFileName);
 
@@ -333,6 +347,7 @@ void MainWindow::on_actionSave_As_triggered()
     if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QFile::Text))
     {
         QMessageBox::warning(this, "Warning", "This file cannot be opened");
+        return;
     }
 
     QTextStream out(&file);
@@ -369,6 +384,13 @@ void MainWindow::saveOnClose(int index)
     if(t->getIsNew())
     {
         QString newFileName = QFileDialog::getSaveFileName(this, "Save As", "C://", "Text File (*.txt)");
+
+        if(newFileName.isNull())
+        {
+            qDebug() << "No file selected";
+            return;
+        }
+
         qDebug() << "Saving New File As : "<<newFileName;
         file.setFileName(newFileName);
 
@@ -387,6 +409,7 @@ void MainWindow::saveOnClose(int index)
     if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QFile::Text))
     {
         QMessageBox::warning(this, "Warning", "This file cannot be opened");
+        return;
     }
 
     // write to file
@@ -439,4 +462,9 @@ void MainWindow::on_actionUndo_triggered()
 {
     QTextEdit *current = getCurrentTextEdit();
     current->undo();
+}
+
+void MainWindow::on_actionClose_Current_Tab_triggered()
+{
+    closeCurTab(ui->tabWidget->currentIndex());
 }

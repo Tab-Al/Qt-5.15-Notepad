@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>C:/Users/Tabish/Favorites/Documents/Icons/Copy.bmp</file>
+        <file>C:/Users/Tabish/Favorites/Documents/Icons/Cut.bmp</file>
+        <file>C:/Users/Tabish/Favorites/Documents/Icons/DeleteSticky.bmp</file>
+        <file>C:/Users/Tabish/Favorites/Documents/Icons/New.bmp</file>
+        <file>C:/Users/Tabish/Favorites/Documents/Icons/Open.bmp</file>
+        <file>C:/Users/Tabish/Favorites/Documents/Icons/Paste.bmp</file>
+        <file>C:/Users/Tabish/Favorites/Documents/Icons/Save.bmp</file>
+    </qresource>
+</RCC>
